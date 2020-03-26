@@ -734,6 +734,7 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 Date start = selectedCells.get(0).getDate();
                 Date end = selectedCells.get(1).getDate();
                 if (dateResolvedListener!=null){
+
                     dateResolvedListener.onMinDateResolved(start);
                     dateResolvedListener.onMaxDateResolved(end);
                 }
