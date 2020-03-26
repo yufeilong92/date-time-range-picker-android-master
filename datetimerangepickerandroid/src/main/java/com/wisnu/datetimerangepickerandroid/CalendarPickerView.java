@@ -733,6 +733,10 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 // Select all days in between start and end.
                 Date start = selectedCells.get(0).getDate();
                 Date end = selectedCells.get(1).getDate();
+                if (dateResolvedListener!=null){
+                    dateResolvedListener.onMinDateResolved(start);
+                    dateResolvedListener.onMaxDateResolved(end);
+                }
                 selectedCells.get(0).setRangeState(RangeState.FIRST);
                 selectedCells.get(1).setRangeState(RangeState.LAST);
 

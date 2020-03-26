@@ -25,10 +25,13 @@ public class MainActivity extends AppCompatActivity {
         Calendar instance = Calendar.getInstance();
         instance.set(2018,0,1);
         final Date time = instance.getTime();
+        Calendar instance1 = Calendar.getInstance();
+        instance1.set(2025,0,1);
+        Date time1 = instance1.getTime();
         cal.init(
                 time,
 //                DateTime.now(DateTimeZone.UTC).toDate(),
-                DateTime.now(DateTimeZone.UTC).plusDays(360).toDate()
+                time1
         )
                 .inMode(CalendarPickerView.SelectionMode.RANGE)
                 .withSelectedDate(selectedDate);
@@ -75,6 +78,29 @@ public class MainActivity extends AppCompatActivity {
             public void onMaxDateResolved(Date date) {
                 selectedDate = date;
                 button1.setText(selectedDate.toString());
+                Log.d("onMaxDateResolved", date.toString());
+            }
+        });
+        cal.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
+            @Override
+            public void onInvalidDateSelected(Date date) {
+                Log.d("onMaxDateResolved", date.toString());
+            }
+        });
+        cal.setCellClickInterceptor(new CalendarPickerView.CellClickInterceptor() {
+            @Override
+            public boolean onCellClicked(Date date) {
+                return false;
+            }
+        });
+        cal.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(Date date) {
+                Log.d("onMaxDateResolved", date.toString());
+            }
+
+            @Override
+            public void onDateUnselected(Date date) {
                 Log.d("onMaxDateResolved", date.toString());
             }
         });
