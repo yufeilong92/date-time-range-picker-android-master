@@ -707,6 +707,11 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 } else if (selectedCals.size() == 1 && newlySelectedCal.before(selectedCals.get(0))) {
                     // We're moving the start of the range back in time: clear the old start date.
                     clearOldSelections();
+                }else if(selectedCals.size() == 1 && newlySelectedCal.getTime().getTime()==selectedCals.get(0).getTime().getTime()){
+                    if (dateResolvedListener!=null){
+                        dateResolvedListener.onDblclickResolved(newlySelectedCal.getTime());
+                    }
+                    clearOldSelections();
                 }
                 break;
 
@@ -734,7 +739,6 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
                 Date start = selectedCells.get(0).getDate();
                 Date end = selectedCells.get(1).getDate();
                 if (dateResolvedListener!=null){
-
                     dateResolvedListener.onMinDateResolved(start);
                     dateResolvedListener.onMaxDateResolved(end);
                 }
@@ -1148,6 +1152,8 @@ public class CalendarPickerView extends ListView implements NestedScrollingChild
         void onMinDateResolved(Date date);
 
         void onMaxDateResolved(Date date);
+
+        void  onDblclickResolved(Date date);
     }
 
     private class DefaultOnInvalidDateSelectedListener implements OnInvalidDateSelectedListener {

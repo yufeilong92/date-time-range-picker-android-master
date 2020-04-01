@@ -80,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 button1.setText(selectedDate.toString());
                 Log.d("onMaxDateResolved", date.toString());
             }
+
+            @Override
+            public void onDblclickResolved(Date date) {
+                selectedDate = date;
+                button1.setText(selectedDate.toString());
+                Log.d("onDblclickResolved", date.toString());
+            }
         });
         cal.setOnInvalidDateSelectedListener(new CalendarPickerView.OnInvalidDateSelectedListener() {
             @Override
